@@ -9,9 +9,10 @@ cargo-fuzz = true
 
 [dependencies]
 libfuzzer-sys = "0.4"
-tokio-test = { path = "../../tokio-test" }
+tokio-test = { version = "0.4.5", path = "../../tokio-test" }
 
 [dependencies.tokio-stream]
+version = "0.1.18"
 path = ".."
 
 

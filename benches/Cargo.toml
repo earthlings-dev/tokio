@@ -2,24 +2,25 @@
 name = "benches"
 version = "0.0.0"
 publish = false
-edition = "2021"
+edition.workspace = true
+rust-version.workspace = true
 license = "MIT"
 
 [features]
 test-util = ["tokio/test-util"]
 
 [dependencies]
-tokio = { version = "1.5.0", path = "../tokio", features = ["full"] }
-criterion = "0.5.1"
-rand = "0.9"
-rand_chacha = "0.9"
+tokio = { workspace = true, features = ["full"] }
+criterion = { workspace = true }
+rand = { workspace = true }
+rand_chacha = { workspace = true }
 
 [dev-dependencies]
-tokio-util = { version = "0.7.0", path = "../tokio-util", features = ["full"] }
-tokio-stream = { version = "0.1", path = "../tokio-stream" }
+tokio-util = { workspace = true, features = ["full"] }
+tokio-stream = { workspace = true }
 
 [target.'cfg(unix)'.dependencies]
-libc = "0.2.42"
+libc = { workspace = true }
 
 [[bench]]
 name = "spawn"

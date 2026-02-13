@@ -255,31 +255,39 @@ unsafe fn to_raw(waker: Arc<ThreadWaker>) -> RawWaker {
 }
 
 unsafe fn from_raw(raw: *const ()) -> Arc<ThreadWaker> {
-    Arc::from_raw(raw as *const ThreadWaker)
+    unsafe { Arc::from_raw(raw as *const ThreadWaker) }
 }
 
 unsafe fn clone(raw: *const ()) -> RawWaker {
-    let waker = from_raw(raw);
+    unsafe {
+        let waker = from_raw(raw);
 
-    // Increment the ref count
-    mem::forget(waker.clone());
+        // Increment the ref count
+        mem::forget(waker.clone());
 
-    to_raw(waker)
+        to_raw(waker)
+    }
 }
 
 unsafe fn wake(raw: *const ()) {
-    let waker = from_raw(raw);
-    waker.wake();
+    unsafe {
+        let waker = from_raw(raw);
+        waker.wake();
+    }
 }
 
 unsafe fn wake_by_ref(raw: *const ()) {
-    let waker = from_raw(raw);
-    waker.wake();
+    unsafe {
+        let waker = from_raw(raw);
+        waker.wake();
 
-    // We don't actually own a reference to the unparker
-    mem::forget(waker);
+        // We don't actually own a reference to the unparker
+        mem::forget(waker);
+    }
 }
 
 unsafe fn drop_waker(raw: *const ()) {
-    let _ = from_raw(raw);
+    unsafe {
+        let _ = from_raw(raw);
+    }
 }

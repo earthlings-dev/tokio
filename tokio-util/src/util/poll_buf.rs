@@ -3,7 +3,7 @@ use tokio::io::{AsyncRead, AsyncWrite, ReadBuf};
 use bytes::{Buf, BufMut};
 use std::io::{self, IoSlice};
 use std::pin::Pin;
-use std::task::{ready, Context, Poll};
+use std::task::{Context, Poll, ready};
 
 /// Try to read data from an `AsyncRead` into an implementer of the [`BufMut`] trait.
 ///

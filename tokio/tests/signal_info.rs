@@ -17,7 +17,7 @@ use support::signal::send_signal;
 
 use tokio::signal;
 use tokio::signal::unix::SignalKind;
-use tokio::time::{timeout, Duration};
+use tokio::time::{Duration, timeout};
 
 #[tokio::test]
 async fn siginfo() {

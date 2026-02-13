@@ -1357,14 +1357,13 @@ impl NotifiedProject<'_> {
             // See if the node was notified but not received. In this case, if
             // the notification was triggered via `notify_one`, it must be sent
             // to the next waiter.
-            if let Some(Notification::One(strategy)) = notification {
-                if let Some(waker) =
+            if let Some(Notification::One(strategy)) = notification
+                && let Some(waker) =
                     notify_locked(&mut waiters, &notify.state, notify_state, strategy)
                 {
                     drop(waiters);
                     waker.wake();
                 }
-            }
         }
     }
 }

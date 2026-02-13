@@ -185,10 +185,10 @@ where
 
         // If we unlocked the child, then the parent may have changed. Check
         // that we still have the right parent.
-        if let Some(actual_parent) = locked_node.parent.as_ref() {
-            if Arc::ptr_eq(actual_parent, &potential_parent) {
-                return func(locked_node, Some(locked_parent));
-            }
+        if let Some(actual_parent) = locked_node.parent.as_ref()
+            && Arc::ptr_eq(actual_parent, &potential_parent)
+        {
+            return func(locked_node, Some(locked_parent));
         }
     }
 }

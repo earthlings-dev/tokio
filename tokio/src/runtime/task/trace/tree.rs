@@ -69,12 +69,13 @@ impl Tree {
             next = format!("{prefix}│\u{a0}\u{a0}");
         }
 
-        write!(f, "{}", {
-            let mut current = current.chars();
-            current.next().unwrap();
-            current.next().unwrap();
-            &current.as_str()
-        })?;
+        let trimmed = {
+            let mut chars = current.chars();
+            chars.next().unwrap();
+            chars.next().unwrap();
+            chars.as_str().to_owned()
+        };
+        write!(f, "{trimmed}")?;
 
         if let Some(consequences) = self.consequences(root) {
             let len = consequences.len();

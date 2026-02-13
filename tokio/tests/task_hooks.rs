@@ -177,7 +177,7 @@ fn task_hook_spawn_location_multi_thread() {
 fn mk_spawn_location_hook(
     event: &'static str,
     count: &Arc<AtomicUsize>,
-) -> impl Fn(&tokio::runtime::TaskMeta<'_>) {
+) -> impl Fn(&tokio::runtime::TaskMeta<'_>) + use<> {
     let count = Arc::clone(count);
     move |data| {
         eprintln!("{event} ({:?}): {:?}", data.id(), data.spawned_at());

@@ -4,7 +4,7 @@
 #![cfg(not(miri))]
 
 use tokio::process::Command;
-use tokio::time::{sleep, Duration};
+use tokio::time::{Duration, sleep};
 
 #[tokio::test]
 async fn issue_7144() {

@@ -30,16 +30,16 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Prints a task dump upon receipt of CTRL+C, or returns if CTRL+C is
     // inputted twice within a second.
     async fn dump_or_quit() {
-        use tokio::time::{timeout, Duration, Instant};
+        use tokio::time::{Duration, Instant, timeout};
         let handle = tokio::runtime::Handle::current();
         let mut last_signal: Option<Instant> = None;
         // wait for CTRL+C
-        while let Ok(_) = tokio::signal::ctrl_c().await {
+        while tokio::signal::ctrl_c().await.is_ok() {
             // exit if a CTRL+C is inputted twice within 1 second
-            if let Some(time_since_last_signal) = last_signal.map(|i| i.elapsed()) {
-                if time_since_last_signal < Duration::from_secs(1) {
-                    return;
-                }
+            if let Some(time_since_last_signal) = last_signal.map(|i| i.elapsed())
+                && time_since_last_signal < Duration::from_secs(1)
+            {
+                return;
             }
             last_signal = Some(Instant::now());
 
@@ -53,7 +53,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                     println!("{trace}\n");
                 }
             } else {
-                println!("Task dumping timed out. Use a native debugger (like gdb) to debug the deadlock.");
+                println!(
+                    "Task dumping timed out. Use a native debugger (like gdb) to debug the deadlock."
+                );
             }
             println!("{:-<80}", "");
             println!("Input CTRL+C twice within 1 second to exit.");

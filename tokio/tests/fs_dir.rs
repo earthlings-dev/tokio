@@ -59,11 +59,13 @@ async fn build_dir_mode_read_only() {
             .await
     );
 
-    assert!(fs::metadata(new_dir)
-        .await
-        .expect("metadata result")
-        .permissions()
-        .readonly());
+    assert!(
+        fs::metadata(new_dir)
+            .await
+            .expect("metadata result")
+            .permissions()
+            .readonly()
+    );
 }
 
 #[tokio::test]

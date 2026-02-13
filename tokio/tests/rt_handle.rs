@@ -3,7 +3,7 @@
 
 use std::sync::Arc;
 use tokio::runtime::Runtime;
-use tokio::sync::{mpsc, Barrier};
+use tokio::sync::{Barrier, mpsc};
 
 #[test]
 #[cfg_attr(panic = "abort", ignore)]

@@ -3,7 +3,7 @@
 #![cfg(unix)]
 #![cfg(not(miri))] // No `sigaction` on Miri.
 
-use tokio::signal::unix::{signal, SignalKind};
+use tokio::signal::unix::{SignalKind, signal};
 
 #[cfg_attr(target_os = "wasi", ignore = "Wasi does not support panic recovery")]
 #[test]

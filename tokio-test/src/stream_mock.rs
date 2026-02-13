@@ -36,12 +36,12 @@
 
 use std::collections::VecDeque;
 use std::pin::Pin;
-use std::task::{ready, Poll};
+use std::task::{Poll, ready};
 use std::time::Duration;
 
 use futures_core::Stream;
 use std::future::Future;
-use tokio::time::{sleep_until, Instant, Sleep};
+use tokio::time::{Instant, Sleep, sleep_until};
 
 #[derive(Debug, Clone)]
 enum Action<T: Unpin> {

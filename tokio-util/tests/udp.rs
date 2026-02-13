@@ -9,8 +9,8 @@ use tokio_util::codec::{Decoder, Encoder, LinesCodec};
 use tokio_util::udp::UdpFramed;
 
 use bytes::{BufMut, BytesMut};
-use futures::future::try_join;
 use futures::future::FutureExt;
+use futures::future::try_join;
 use futures::sink::SinkExt;
 use std::io;
 use std::sync::Arc;

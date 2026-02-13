@@ -7,7 +7,7 @@ use std::{
     io, mem,
     os::fd::AsFd,
     os::unix::io::{AsRawFd, RawFd},
-    pin::{pin, Pin},
+    pin::{Pin, pin},
     task::{Context, Poll},
 };
 use tempfile::tempfile;
@@ -34,7 +34,7 @@ mod aio {
 
     impl<'fd> FsyncFut<'fd> {
         pub fn submit(self: Pin<&mut Self>) -> io::Result<()> {
-            let p = unsafe { self.map_unchecked_mut(|s| &mut s.0 .0) };
+            let p = unsafe { self.map_unchecked_mut(|s| &mut s.0.0) };
             match p.submit() {
                 Ok(()) => Ok(()),
                 Err(e) => Err(io::Error::from_raw_os_error(e as i32)),
@@ -53,7 +53,7 @@ mod aio {
                 Poll::Ready(Ok(_ev)) => {
                     // At this point, we could clear readiness.  But there's no
                     // point, since we're about to drop the Aio.
-                    let p = unsafe { self.map_unchecked_mut(|s| &mut s.0 .0) };
+                    let p = unsafe { self.map_unchecked_mut(|s| &mut s.0.0) };
                     let result = p.aio_return();
                     match result {
                         Ok(r) => Poll::Ready(Ok(r)),
@@ -121,7 +121,7 @@ mod aio {
                     // returned Ready.  But that's ok; most futures behave this
                     // way.
                     self.0.clear_ready(ev);
-                    let r = unsafe { libc::aio_return(self.0 .0.as_mut().get_unchecked_mut()) };
+                    let r = unsafe { libc::aio_return(self.0.0.as_mut().get_unchecked_mut()) };
                     if r >= 0 {
                         Poll::Ready(Ok(r as usize))
                     } else {

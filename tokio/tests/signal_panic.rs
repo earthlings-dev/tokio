@@ -6,7 +6,7 @@
 
 use std::error::Error;
 use tokio::runtime::Builder;
-use tokio::signal::unix::{signal, SignalKind};
+use tokio::signal::unix::{SignalKind, signal};
 
 mod support {
     pub mod panic;

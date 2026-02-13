@@ -123,11 +123,10 @@ impl<W: AsyncWrite, F: FnMut(&[u8])> AsyncWrite for InspectWriter<W, F> {
     fn poll_write(self: Pin<&mut Self>, cx: &mut Context<'_>, buf: &[u8]) -> Poll<Result<usize>> {
         let me = self.project();
         let res = me.writer.poll_write(cx, buf);
-        if let Poll::Ready(Ok(count)) = res {
-            if count != 0 {
+        if let Poll::Ready(Ok(count)) = res
+            && count != 0 {
                 (me.f)(&buf[..count]);
             }
-        }
         res
     }
 

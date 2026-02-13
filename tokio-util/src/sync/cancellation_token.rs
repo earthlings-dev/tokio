@@ -379,7 +379,7 @@ impl WaitForCancellationFutureOwned {
         // SAFETY: The `Arc::as_ptr` method guarantees that `inner_ptr` remains
         // valid until the strong count of the Arc drops to zero, and the caller
         // guarantees that they will drop the future before that happens.
-        (*inner_ptr).notified()
+        unsafe { (*inner_ptr).notified() }
     }
 }
 

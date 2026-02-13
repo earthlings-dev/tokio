@@ -310,11 +310,10 @@ cfg_test_util! {
                 }),
             };
 
-            if start_paused {
-                if let Err(msg) = clock.pause() {
+            if start_paused
+                && let Err(msg) = clock.pause() {
                     panic!("{}", msg);
                 }
-            }
 
             clock
         }

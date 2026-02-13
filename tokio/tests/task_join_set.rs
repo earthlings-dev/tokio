@@ -1,7 +1,7 @@
 #![warn(rust_2018_idioms)]
 #![cfg(feature = "full")]
 
-use futures::future::{pending, FutureExt};
+use futures::future::{FutureExt, pending};
 use std::panic;
 use tokio::sync::oneshot;
 use tokio::task::{JoinSet, LocalSet};
@@ -207,11 +207,12 @@ fn runtime_gone() {
         drop(rt);
     }
 
-    assert!(rt()
-        .block_on(set.join_next())
-        .unwrap()
-        .unwrap_err()
-        .is_cancelled());
+    assert!(
+        rt().block_on(set.join_next())
+            .unwrap()
+            .unwrap_err()
+            .is_cancelled()
+    );
 }
 
 #[tokio::test]

@@ -43,8 +43,8 @@ fn test_abort_without_panic_3157() {
 /// <https://github.com/tokio-rs/tokio/issues/3662>.
 #[test]
 fn test_abort_without_panic_3662() {
-    use std::sync::atomic::{AtomicBool, Ordering};
     use std::sync::Arc;
+    use std::sync::atomic::{AtomicBool, Ordering};
 
     struct DropCheck(Arc<AtomicBool>);
 

@@ -5,8 +5,8 @@ name = "tokio-test"
 # - Update CHANGELOG.md.
 # - Create "tokio-test-0.4.x" git tag.
 version = "0.4.5"
-edition = "2021"
-rust-version = "1.71"
+edition.workspace = true
+rust-version.workspace = true
 authors = ["Tokio Contributors <team@tokio.rs>"]
 license = "MIT"
 repository = "https://github.com/tokio-rs/tokio"
@@ -17,13 +17,13 @@ Testing utilities for Tokio- and futures-based code
 categories = ["asynchronous", "development-tools::testing"]
 
 [dependencies]
-tokio = { version = "1.2.0", features = ["rt", "sync", "time", "test-util"] }
-tokio-stream = "0.1.1"
-futures-core = "0.3.0"
+tokio = { workspace = true, features = ["rt", "sync", "time", "test-util"] }
+tokio-stream = { workspace = true }
+futures-core = { workspace = true }
 
 [dev-dependencies]
-tokio = { version = "1.2.0", features = ["full"] }
-futures-util = "0.3.0"
+tokio = { workspace = true, features = ["full"] }
+futures-util = { workspace = true }
 
 [package.metadata.docs.rs]
 all-features = true

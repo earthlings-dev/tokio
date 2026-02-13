@@ -16,11 +16,10 @@ impl Defer {
         let mut deferred = self.deferred.borrow_mut();
 
         // If the same task adds itself a bunch of times, then only add it once.
-        if let Some(last) = deferred.last() {
-            if last.will_wake(waker) {
+        if let Some(last) = deferred.last()
+            && last.will_wake(waker) {
                 return;
             }
-        }
 
         deferred.push(waker.clone());
     }

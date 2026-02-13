@@ -3,7 +3,7 @@
 
 use tokio::runtime::Runtime;
 use tokio::sync::oneshot;
-use tokio::time::{timeout, Duration};
+use tokio::time::{Duration, timeout};
 use tokio_test::{assert_err, assert_ok};
 
 use std::future::Future;
@@ -49,8 +49,8 @@ fn no_extra_poll() {
     use pin_project_lite::pin_project;
     use std::pin::Pin;
     use std::sync::{
-        atomic::{AtomicUsize, Ordering::SeqCst},
         Arc,
+        atomic::{AtomicUsize, Ordering::SeqCst},
     };
     use std::task::{Context, Poll};
     use tokio_stream::{Stream, StreamExt};
@@ -357,7 +357,7 @@ mod unstable {
     #[cfg_attr(target_os = "wasi", ignore = "Wasi does not support panic recovery")]
     fn shutdown_all_concurrent_block_on() {
         const N: usize = 2;
-        use std::sync::{mpsc, Arc};
+        use std::sync::{Arc, mpsc};
 
         let rt = Builder::new_current_thread()
             .unhandled_panic(UnhandledPanic::ShutdownRuntime)

@@ -1,7 +1,8 @@
 use tokio::sync::mpsc;
 
 use criterion::measurement::WallTime;
-use criterion::{black_box, criterion_group, criterion_main, BenchmarkGroup, Criterion};
+use criterion::{BenchmarkGroup, Criterion, criterion_group, criterion_main};
+use std::hint::black_box;
 
 #[derive(Debug, Copy, Clone)]
 struct Medium(#[allow(dead_code)] [usize; 64]);

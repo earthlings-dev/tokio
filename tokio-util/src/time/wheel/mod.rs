@@ -198,11 +198,10 @@ where
         let mut res = true;
 
         for l2 in start_level..NUM_LEVELS {
-            if let Some(e2) = self.levels[l2].next_expiration(self.elapsed) {
-                if e2.deadline < before {
+            if let Some(e2) = self.levels[l2].next_expiration(self.elapsed)
+                && e2.deadline < before {
                     res = false;
                 }
-            }
         }
 
         res

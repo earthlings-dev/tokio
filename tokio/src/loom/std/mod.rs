@@ -74,7 +74,7 @@ pub(crate) mod sync {
         pub(crate) use crate::loom::std::atomic_u64::{AtomicU64, StaticAtomicU64};
         pub(crate) use crate::loom::std::atomic_usize::AtomicUsize;
 
-        pub(crate) use std::sync::atomic::{fence, AtomicBool, AtomicPtr, AtomicU8, Ordering};
+        pub(crate) use std::sync::atomic::{AtomicBool, AtomicPtr, AtomicU8, Ordering, fence};
     }
 
     pub(crate) use super::barrier::Barrier;
@@ -118,7 +118,7 @@ pub(crate) mod thread {
 
     #[allow(unused_imports)]
     pub(crate) use std::thread::{
-        current, panicking, park, park_timeout, sleep, spawn, AccessError, Builder, JoinHandle,
-        LocalKey, Result, Thread, ThreadId,
+        AccessError, Builder, JoinHandle, LocalKey, Result, Thread, ThreadId, current, panicking,
+        park, park_timeout, sleep, spawn,
     };
 }

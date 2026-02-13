@@ -566,7 +566,7 @@ impl<T> DelayQueue<T> {
             }
 
             let delay_time = self.start + Duration::from_millis(when);
-            if let Some(ref mut delay) = &mut self.delay {
+            if let Some(delay) = &mut self.delay {
                 delay.as_mut().reset(delay_time);
             } else {
                 self.delay = Some(Box::pin(sleep_until(delay_time)));
@@ -769,11 +769,10 @@ impl<T> DelayQueue<T> {
             }
         }
 
-        if self.slab.is_empty() {
-            if let Some(waker) = self.waker.take() {
+        if self.slab.is_empty()
+            && let Some(waker) = self.waker.take() {
                 waker.wake();
             }
-        }
 
         Expired {
             key: Key::new(key.index),
@@ -866,7 +865,7 @@ impl<T> DelayQueue<T> {
         self.insert_idx(when, *key);
 
         let next_deadline = self.next_deadline();
-        if let (Some(ref mut delay), Some(deadline)) = (&mut self.delay, next_deadline) {
+        if let (Some(delay), Some(deadline)) = (&mut self.delay, next_deadline) {
             // This should awaken us if necessary (ie, if already expired)
             delay.as_mut().reset(deadline);
         }

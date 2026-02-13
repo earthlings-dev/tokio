@@ -12,8 +12,8 @@ use support::signal::send_signal;
 
 use futures::stream::{FuturesUnordered, StreamExt};
 use std::collections::HashMap;
-use tokio::signal::unix::{signal, SignalKind};
-use tokio::time::{sleep, Duration};
+use tokio::signal::unix::{SignalKind, signal};
+use tokio::time::{Duration, sleep};
 use tokio_test::assert_ok;
 
 #[tokio::test]

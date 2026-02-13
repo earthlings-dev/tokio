@@ -107,7 +107,7 @@ fn multi_thread() {
 mod future_completes_during_trace {
     use super::*;
 
-    use core::future::{poll_fn, Future};
+    use core::future::{Future, poll_fn};
 
     /// A future that completes only during a trace.
     fn complete_during_trace() -> impl Future<Output = ()> + Send {

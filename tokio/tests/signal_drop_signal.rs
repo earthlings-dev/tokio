@@ -8,7 +8,7 @@ mod support {
 }
 use support::signal::send_signal;
 
-use tokio::signal::unix::{signal, SignalKind};
+use tokio::signal::unix::{SignalKind, signal};
 
 #[tokio::test]
 async fn dropping_signal_does_not_deregister_any_other_instances() {

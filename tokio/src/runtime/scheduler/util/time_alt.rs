@@ -159,11 +159,10 @@ pub(crate) fn post_auto_advance(drv_hdl: &driver::Handle, duration: Option<Durat
 
         if let Some(park_duration) = duration {
             let clock = drv_hdl.clock();
-            if clock.can_auto_advance() && !time_hdl.did_wake() {
-                if let Err(msg) = clock.advance(park_duration) {
+            if clock.can_auto_advance() && !time_hdl.did_wake()
+                && let Err(msg) = clock.advance(park_duration) {
                     panic!("{msg}");
                 }
-            }
         }
     })
 }

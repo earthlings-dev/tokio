@@ -9,7 +9,7 @@ mod support {
 use support::signal::send_signal;
 
 use tokio::runtime::Runtime;
-use tokio::signal::unix::{signal, SignalKind};
+use tokio::signal::unix::{SignalKind, signal};
 
 #[test]
 fn dropping_loops_does_not_cause_starvation() {

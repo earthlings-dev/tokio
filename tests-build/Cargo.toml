@@ -2,7 +2,8 @@
 name = "tests-build"
 version = "0.1.0"
 authors = ["Tokio Contributors <team@tokio.rs>"]
-edition = "2021"
+edition.workspace = true
+rust-version.workspace = true
 license = "MIT"
 publish = false
 
@@ -11,10 +12,10 @@ full = ["tokio/full"]
 rt = ["tokio/rt", "tokio/macros"]
 
 [dependencies]
-tokio = { version = "1.0.0", path = "../tokio", optional = true }
+tokio = { workspace = true, optional = true }
 
 [dev-dependencies]
-trybuild = "1.0"
+trybuild = { workspace = true }
 
 [lints]
 workspace = true

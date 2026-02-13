@@ -2,7 +2,7 @@ use crate::Stream;
 
 use core::fmt;
 use core::pin::Pin;
-use core::task::{ready, Context, Poll};
+use core::task::{Context, Poll, ready};
 use pin_project_lite::pin_project;
 
 pin_project! {

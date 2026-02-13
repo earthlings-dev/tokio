@@ -1,8 +1,8 @@
 #![cfg(feature = "sync")]
 
 use tokio::sync::watch;
-use tokio_stream::wrappers::WatchStream;
 use tokio_stream::StreamExt;
+use tokio_stream::wrappers::WatchStream;
 use tokio_test::assert_pending;
 use tokio_test::task::spawn;
 

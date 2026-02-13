@@ -98,10 +98,11 @@ async fn task_trace_self() {
     }
     for line in bad_line {
         let s = format!("{}:{}:", file!(), line);
-        assert!(!log
-            .lock()
-            .unwrap()
-            .iter()
-            .any(|x| format!("{x}").contains(&s)));
+        assert!(
+            !log.lock()
+                .unwrap()
+                .iter()
+                .any(|x| format!("{x}").contains(&s))
+        );
     }
 }

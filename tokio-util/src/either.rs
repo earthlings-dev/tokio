@@ -215,8 +215,8 @@ where
 #[cfg(all(test, not(loom)))]
 mod tests {
     use super::*;
-    use tokio::io::{repeat, AsyncReadExt, Repeat};
-    use tokio_stream::{once, Once, StreamExt};
+    use tokio::io::{AsyncReadExt, Repeat, repeat};
+    use tokio_stream::{Once, StreamExt, once};
 
     #[tokio::test]
     async fn either_is_stream() {

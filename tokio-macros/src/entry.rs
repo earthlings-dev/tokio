@@ -1,7 +1,7 @@
 use proc_macro2::{Span, TokenStream, TokenTree};
-use quote::{quote, quote_spanned, ToTokens};
+use quote::{ToTokens, quote, quote_spanned};
 use syn::parse::{Parse, ParseStream, Parser};
-use syn::{braced, Attribute, Ident, Path, Signature, Visibility};
+use syn::{Attribute, Ident, Path, Signature, Visibility, braced};
 
 // syn::AttributeArgs does not implement syn::Parse
 type AttributeArgs = syn::punctuated::Punctuated<syn::Meta, syn::Token![,]>;
@@ -19,10 +19,20 @@ impl RuntimeFlavor {
             "current_thread" => Ok(RuntimeFlavor::CurrentThread),
             "multi_thread" => Ok(RuntimeFlavor::Threaded),
             "local" => Ok(RuntimeFlavor::Local),
-            "single_thread" => Err("The single threaded runtime flavor is called `current_thread`.".to_string()),
-            "basic_scheduler" => Err("The `basic_scheduler` runtime flavor has been renamed to `current_thread`.".to_string()),
-            "threaded_scheduler" => Err("The `threaded_scheduler` runtime flavor has been renamed to `multi_thread`.".to_string()),
-            _ => Err(format!("No such runtime flavor `{s}`. The runtime flavors are `current_thread`, `local`, and `multi_thread`.")),
+            "single_thread" => {
+                Err("The single threaded runtime flavor is called `current_thread`.".to_string())
+            }
+            "basic_scheduler" => Err(
+                "The `basic_scheduler` runtime flavor has been renamed to `current_thread`."
+                    .to_string(),
+            ),
+            "threaded_scheduler" => Err(
+                "The `threaded_scheduler` runtime flavor has been renamed to `multi_thread`."
+                    .to_string(),
+            ),
+            _ => Err(format!(
+                "No such runtime flavor `{s}`. The runtime flavors are `current_thread`, `local`, and `multi_thread`."
+            )),
         }
     }
 }
@@ -38,7 +48,9 @@ impl UnhandledPanic {
         match s {
             "ignore" => Ok(UnhandledPanic::Ignore),
             "shutdown_runtime" => Ok(UnhandledPanic::ShutdownRuntime),
-            _ => Err(format!("No such unhandled panic behavior `{s}`. The unhandled panic behaviors are `ignore` and `shutdown_runtime`.")),
+            _ => Err(format!(
+                "No such unhandled panic behavior `{s}`. The unhandled panic behaviors are `ignore` and `shutdown_runtime`."
+            )),
         }
     }
 
@@ -401,7 +413,9 @@ fn build_config(
                         format!("The `{name}` attribute requires an argument.")
                     }
                     name => {
-                        format!("Unknown attribute {name} is specified; expected one of: `flavor`, `worker_threads`, `start_paused`, `crate`, `unhandled_panic`.")
+                        format!(
+                            "Unknown attribute {name} is specified; expected one of: `flavor`, `worker_threads`, `start_paused`, `crate`, `unhandled_panic`."
+                        )
                     }
                 };
                 return Err(syn::Error::new_spanned(path, msg));

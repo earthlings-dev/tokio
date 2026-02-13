@@ -1,7 +1,7 @@
 #![allow(unknown_lints, unexpected_cfgs)]
 #![cfg(tokio_unstable)]
 
-use std::sync::{atomic::AtomicUsize, Arc, Mutex};
+use std::sync::{Arc, Mutex, atomic::AtomicUsize};
 
 use tokio::task::yield_now;
 

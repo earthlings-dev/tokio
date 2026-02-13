@@ -29,7 +29,7 @@ use std::fmt;
 use std::future::Future;
 use std::pin::Pin;
 use std::sync::Arc;
-use std::task::{self, ready, Poll, Waker};
+use std::task::{self, Poll, Waker, ready};
 use std::{cmp, io};
 
 /// An I/O object that follows a predefined script.

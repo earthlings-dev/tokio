@@ -4,7 +4,7 @@
 
 use tokio::runtime::{self, Runtime};
 
-use criterion::{criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
 
 const NUM_SPAWN: usize = 1_000;
 

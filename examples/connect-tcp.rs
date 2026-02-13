@@ -20,7 +20,7 @@ use tokio::net::TcpStream;
 use tokio_util::codec::{BytesCodec, FramedRead, FramedWrite};
 
 use bytes::Bytes;
-use futures::{future, Sink, SinkExt, Stream, StreamExt};
+use futures::{Sink, SinkExt, Stream, StreamExt, future};
 use std::env;
 use std::error::Error;
 use std::net::SocketAddr;

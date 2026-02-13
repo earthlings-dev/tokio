@@ -1,10 +1,11 @@
-use rand::prelude::*;
-use std::sync::atomic::{AtomicU64, Ordering};
+use rand::{Rng, RngExt, SeedableRng};
 use std::sync::Arc;
-use tokio::sync::{watch, Notify};
+use std::sync::atomic::{AtomicU64, Ordering};
+use tokio::sync::{Notify, watch};
 
 use criterion::measurement::WallTime;
-use criterion::{black_box, criterion_group, criterion_main, BenchmarkGroup, Criterion};
+use criterion::{BenchmarkGroup, Criterion, criterion_group, criterion_main};
+use std::hint::black_box;
 
 fn rt() -> tokio::runtime::Runtime {
     tokio::runtime::Builder::new_multi_thread()
@@ -13,7 +14,7 @@ fn rt() -> tokio::runtime::Runtime {
         .unwrap()
 }
 
-fn do_work(rng: &mut impl RngCore) -> u32 {
+fn do_work(rng: &mut impl Rng) -> u32 {
     use std::fmt::Write;
     let mut message = String::new();
     for i in 1..=10 {

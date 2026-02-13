@@ -23,29 +23,35 @@ async fn open_options_windows_share_mode() {
 #[cfg(windows)]
 async fn open_options_windows_custom_flags() {
     // TESTING HACK: use Debug output to check the stored data
-    assert!(format!(
-        "{:?}",
-        OpenOptions::new().custom_flags(FileSystem::FILE_FLAG_DELETE_ON_CLOSE)
-    )
-    .contains("custom_flags: 67108864,"));
+    assert!(
+        format!(
+            "{:?}",
+            OpenOptions::new().custom_flags(FileSystem::FILE_FLAG_DELETE_ON_CLOSE)
+        )
+        .contains("custom_flags: 67108864,")
+    );
 }
 
 #[tokio::test]
 #[cfg(windows)]
 async fn open_options_windows_attributes() {
-    assert!(format!(
-        "{:?}",
-        OpenOptions::new().attributes(FileSystem::FILE_ATTRIBUTE_HIDDEN)
-    )
-    .contains("attributes: 2,"));
+    assert!(
+        format!(
+            "{:?}",
+            OpenOptions::new().attributes(FileSystem::FILE_ATTRIBUTE_HIDDEN)
+        )
+        .contains("attributes: 2,")
+    );
 }
 
 #[tokio::test]
 #[cfg(windows)]
 async fn open_options_windows_security_qos_flags() {
-    assert!(format!(
-        "{:?}",
-        OpenOptions::new().security_qos_flags(FileSystem::SECURITY_IDENTIFICATION)
-    )
-    .contains("security_qos_flags: 1114112,"));
+    assert!(
+        format!(
+            "{:?}",
+            OpenOptions::new().security_qos_flags(FileSystem::SECURITY_IDENTIFICATION)
+        )
+        .contains("security_qos_flags: 1114112,")
+    );
 }

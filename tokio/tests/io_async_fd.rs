@@ -1,10 +1,10 @@
 #![warn(rust_2018_idioms)]
 #![cfg(all(unix, feature = "full"))]
 
-use std::os::unix::io::{AsRawFd, RawFd};
+use std::os::unix::io::{AsFd, AsRawFd, BorrowedFd, RawFd};
 use std::sync::{
-    atomic::{AtomicBool, Ordering},
     Arc,
+    atomic::{AtomicBool, Ordering},
 };
 use std::time::Duration;
 use std::{
@@ -17,8 +17,8 @@ use nix::unistd::{read, write};
 
 use futures::poll;
 
-use tokio::io::unix::{AsyncFd, AsyncFdReadyGuard};
 use tokio::io::Interest;
+use tokio::io::unix::{AsyncFd, AsyncFdReadyGuard};
 use tokio_test::{assert_err, assert_pending};
 
 struct TestWaker {
@@ -67,9 +67,15 @@ impl AsRawFd for FileDescriptor {
     }
 }
 
+impl AsFd for FileDescriptor {
+    fn as_fd(&self) -> BorrowedFd<'_> {
+        self.fd.as_fd()
+    }
+}
+
 impl Read for &FileDescriptor {
     fn read(&mut self, buf: &mut [u8]) -> io::Result<usize> {
-        read(self.fd.as_raw_fd(), buf).map_err(io::Error::from)
+        read(&self.fd, buf).map_err(io::Error::from)
     }
 }
 
@@ -100,9 +106,11 @@ impl Write for FileDescriptor {
 }
 
 fn set_nonblocking(fd: RawFd) {
-    use nix::fcntl::{OFlag, F_GETFL, F_SETFL};
+    use nix::fcntl::{F_GETFL, F_SETFL, OFlag};
 
-    let flags = nix::fcntl::fcntl(fd, F_GETFL).expect("fcntl(F_GETFD)");
+    // SAFETY: fd is valid for the duration of these calls.
+    let borrowed = unsafe { BorrowedFd::borrow_raw(fd) };
+    let flags = nix::fcntl::fcntl(borrowed, F_GETFL).expect("fcntl(F_GETFL)");
 
     if flags < 0 {
         panic!(
@@ -114,7 +122,8 @@ fn set_nonblocking(fd: RawFd) {
 
     let flags = OFlag::from_bits_truncate(flags) | OFlag::O_NONBLOCK;
 
-    nix::fcntl::fcntl(fd, F_SETFL(flags)).expect("fcntl(F_SETFD)");
+    let borrowed = unsafe { BorrowedFd::borrow_raw(fd) };
+    nix::fcntl::fcntl(borrowed, F_SETFL(flags)).expect("fcntl(F_SETFL)");
 }
 
 fn socketpair() -> (FileDescriptor, FileDescriptor) {
@@ -385,7 +394,10 @@ async fn try_io_readable() {
             called = true;
             Ok(())
         });
-        assert!(!called, "closure should not have been called, since socket readable state should have been cleared");
+        assert!(
+            !called,
+            "closure should not have been called, since socket readable state should have been cleared"
+        );
     }
 }
 
@@ -426,7 +438,10 @@ async fn try_io_writable() {
             called = true;
             Ok(())
         });
-        assert!(!called, "closure should not have been called, since socket writable state should have been cleared");
+        assert!(
+            !called,
+            "closure should not have been called, since socket writable state should have been cleared"
+        );
     }
 }
 
@@ -557,9 +572,11 @@ async fn poll_fns() {
 fn assert_pending<T: std::fmt::Debug, F: Future<Output = T>>(f: F) -> std::pin::Pin<Box<F>> {
     let mut pinned = Box::pin(f);
 
-    assert_pending!(pinned
-        .as_mut()
-        .poll(&mut Context::from_waker(futures::task::noop_waker_ref())));
+    assert_pending!(
+        pinned
+            .as_mut()
+            .poll(&mut Context::from_waker(futures::task::noop_waker_ref()))
+    );
 
     pinned
 }

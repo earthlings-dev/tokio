@@ -30,7 +30,7 @@
 
 use std::env;
 use std::error::Error;
-use std::io::{stdin, Read};
+use std::io::{Read, stdin};
 use std::net::SocketAddr;
 use tokio::net::UdpSocket;
 

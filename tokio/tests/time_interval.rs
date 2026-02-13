@@ -390,7 +390,7 @@ impl Stream for IntervalStreamer {
             Poll::Pending => Poll::Pending,
             Poll::Ready(_) => {
                 this.counter += 1;
-                if this.counter % 4 == 0 {
+                if this.counter.is_multiple_of(4) {
                     Poll::Ready(Some(this.counter))
                 } else {
                     if this.wake_on_pending {

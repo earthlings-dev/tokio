@@ -2,7 +2,7 @@
 
 use tokio::net::TcpStream;
 use tokio::sync::oneshot;
-use tokio::time::{timeout, Duration};
+use tokio::time::{Duration, timeout};
 
 use futures::executor::block_on;
 

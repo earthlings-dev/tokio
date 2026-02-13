@@ -7,7 +7,7 @@
 ))]
 
 use std::future::Future;
-use std::sync::{mpsc, Arc, Mutex};
+use std::sync::{Arc, Mutex, mpsc};
 use std::task::Poll;
 use std::thread;
 use tokio::macros::support::poll_fn;
@@ -674,17 +674,19 @@ fn budget_exhaustion_yield() {
     let mut did_yield = false;
 
     // block on a task which consumes budget until it yields
-    rt.block_on(poll_fn(|cx| loop {
-        if did_yield {
-            return Poll::Ready(());
-        }
+    rt.block_on(poll_fn(|cx| {
+        loop {
+            if did_yield {
+                return Poll::Ready(());
+            }
 
-        let fut = consume_budget();
-        tokio::pin!(fut);
+            let fut = consume_budget();
+            tokio::pin!(fut);
 
-        if fut.poll(cx).is_pending() {
-            did_yield = true;
-            return Poll::Pending;
+            if fut.poll(cx).is_pending() {
+                did_yield = true;
+                return Poll::Pending;
+            }
         }
     }));
 

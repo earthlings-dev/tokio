@@ -2,7 +2,8 @@
 //! This essentially measure the time to enqueue a task in the local and remote
 //! case.
 
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
+use std::hint::black_box;
 
 async fn work() -> usize {
     let val = 1 + 1;

@@ -2,7 +2,7 @@
 #![cfg(all(feature = "full", not(target_os = "wasi")))] // Wasi does not support panic recovery
 
 use tokio::io::{
-    split, AsyncRead, AsyncReadExt, AsyncWrite, AsyncWriteExt, ReadBuf, ReadHalf, WriteHalf,
+    AsyncRead, AsyncReadExt, AsyncWrite, AsyncWriteExt, ReadBuf, ReadHalf, WriteHalf, split,
 };
 
 use std::io;

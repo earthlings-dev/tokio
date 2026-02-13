@@ -8,11 +8,11 @@ use tokio::runtime;
 use tokio::sync::oneshot;
 use tokio_test::{assert_err, assert_ok, assert_pending};
 
-use std::future::{poll_fn, Future};
+use std::future::{Future, poll_fn};
 use std::pin::Pin;
 use std::sync::atomic::Ordering::Relaxed;
 use std::sync::atomic::{AtomicUsize, Ordering};
-use std::sync::{mpsc, Arc, Mutex};
+use std::sync::{Arc, Mutex, mpsc};
 use std::task::{Context, Poll, Waker};
 
 macro_rules! cfg_metrics {
@@ -870,7 +870,7 @@ mod unstable {
 
     #[test]
     fn test_disable_lifo_slot() {
-        use std::sync::mpsc::{channel, RecvTimeoutError};
+        use std::sync::mpsc::{RecvTimeoutError, channel};
 
         let rt = runtime::Builder::new_multi_thread()
             .disable_lifo_slot()

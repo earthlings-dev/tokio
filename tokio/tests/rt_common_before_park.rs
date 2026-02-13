@@ -2,8 +2,8 @@
 #![cfg(feature = "full")]
 #![cfg(not(target_os = "wasi"))] // Wasi doesn't support threads
 
-use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::Arc;
+use std::sync::atomic::{AtomicBool, Ordering};
 use tokio::runtime::Builder;
 use tokio::sync::Notify;
 

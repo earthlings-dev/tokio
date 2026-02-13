@@ -1,6 +1,6 @@
 #![cfg(all(feature = "time", feature = "sync", feature = "io-util"))]
 
-use tokio::time::{self, sleep, Duration};
+use tokio::time::{self, Duration, sleep};
 use tokio_stream::StreamExt;
 use tokio_test::*;
 

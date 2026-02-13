@@ -3,7 +3,7 @@
 #![cfg(feature = "full")]
 
 use futures::StreamExt;
-use tokio::time::{self, sleep, sleep_until, Duration, Instant};
+use tokio::time::{self, Duration, Instant, sleep, sleep_until};
 use tokio_test::{assert_pending, assert_ready, task};
 use tokio_util::time::DelayQueue;
 

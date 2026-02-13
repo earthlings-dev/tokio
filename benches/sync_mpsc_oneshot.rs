@@ -3,7 +3,7 @@ use tokio::{
     sync::{mpsc, oneshot},
 };
 
-use criterion::{criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
 
 fn request_reply_current_thread(c: &mut Criterion) {
     let rt = tokio::runtime::Builder::new_current_thread()

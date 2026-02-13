@@ -2,7 +2,7 @@
 #![cfg(all(feature = "full", not(target_os = "wasi")))] // Wasi does not support bind()
 
 use std::time::Duration;
-use tokio::io::{self, copy_bidirectional, AsyncReadExt, AsyncWriteExt};
+use tokio::io::{self, AsyncReadExt, AsyncWriteExt, copy_bidirectional};
 use tokio::net::TcpStream;
 use tokio::task::JoinHandle;
 
@@ -116,7 +116,7 @@ async fn blocking_one_side_does_not_block_other() {
 #[tokio::test]
 async fn immediate_exit_on_write_error() {
     let payload = b"here, take this";
-    let error = || io::Error::new(io::ErrorKind::Other, "no thanks!");
+    let error = || io::Error::other("no thanks!");
 
     let mut a = tokio_test::io::Builder::new()
         .read(payload)
@@ -133,7 +133,7 @@ async fn immediate_exit_on_write_error() {
 
 #[tokio::test]
 async fn immediate_exit_on_read_error() {
-    let error = || io::Error::new(io::ErrorKind::Other, "got nothing!");
+    let error = || io::Error::other("got nothing!");
 
     let mut a = tokio_test::io::Builder::new().read_error(error()).build();
 

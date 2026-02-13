@@ -1,8 +1,8 @@
 #![warn(rust_2018_idioms)]
 #![cfg(all(feature = "full", target_os = "linux"))]
 
-use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Arc;
+use std::sync::atomic::{AtomicUsize, Ordering};
 use tokio::net::UdpSocket;
 use tokio::task::coop::{consume_budget, has_budget_remaining};
 

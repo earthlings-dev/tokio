@@ -4,7 +4,7 @@ use std::borrow::Borrow;
 use std::future::poll_fn;
 use std::hash::Hash;
 use std::pin::Pin;
-use std::task::{ready, Context, Poll};
+use std::task::{Context, Poll, ready};
 
 /// Combine many streams into one, indexing each source stream with a unique
 /// key.

@@ -2,8 +2,8 @@
 #![cfg(feature = "full")]
 
 use std::sync::{
-    atomic::{AtomicU32, Ordering},
     Arc,
+    atomic::{AtomicU32, Ordering},
 };
 use tokio::sync::SetOnce;
 

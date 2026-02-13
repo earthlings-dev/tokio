@@ -5,7 +5,8 @@
 //! - Each task spawns M batches of B spawn_blocking tasks (no-ops)
 //! - Each batch is awaited to completion before starting the next
 
-use criterion::{black_box, criterion_group, criterion_main, BenchmarkId, Criterion};
+use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
+use std::hint::black_box;
 use tokio::runtime::{self, Runtime};
 use tokio::task::JoinSet;
 

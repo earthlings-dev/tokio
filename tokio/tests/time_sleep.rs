@@ -242,21 +242,27 @@ async fn reset_after_firing() {
     let deadline = timer.deadline();
 
     timer.as_mut().await;
-    assert_ready!(timer
-        .as_mut()
-        .poll(&mut Context::from_waker(noop_waker_ref())));
+    assert_ready!(
+        timer
+            .as_mut()
+            .poll(&mut Context::from_waker(noop_waker_ref()))
+    );
     timer
         .as_mut()
         .reset(tokio::time::Instant::now() + std::time::Duration::from_secs(600));
 
     assert_ne!(deadline, timer.deadline());
 
-    assert_pending!(timer
-        .as_mut()
-        .poll(&mut Context::from_waker(noop_waker_ref())));
-    assert_pending!(timer
-        .as_mut()
-        .poll(&mut Context::from_waker(noop_waker_ref())));
+    assert_pending!(
+        timer
+            .as_mut()
+            .poll(&mut Context::from_waker(noop_waker_ref()))
+    );
+    assert_pending!(
+        timer
+            .as_mut()
+            .poll(&mut Context::from_waker(noop_waker_ref()))
+    );
 }
 
 #[tokio::test]

@@ -114,7 +114,8 @@ async fn status_closes_any_pipes() {
     // Cat will open a pipe between the parent and child.
     // If `status_async` doesn't ensure the handles are closed,
     // we would end up blocking forever (and time out).
-    let child = cat().status();
+    let mut cmd = cat();
+    let child = cmd.status();
 
     assert_ok!(child.await);
 }
@@ -206,15 +207,17 @@ async fn vectored_writes() {
         let mut input = Bytes::from_static(b"hello\n").chain(Bytes::from_static(b"world!\n"));
         let mut writes_completed = 0;
 
-        std::future::poll_fn(|cx| loop {
-            let mut slices = [IoSlice::new(&[]); 2];
-            let vectored = input.chunks_vectored(&mut slices);
-            if vectored == 0 {
-                return std::task::Poll::Ready(std::io::Result::Ok(()));
+        std::future::poll_fn(|cx| {
+            loop {
+                let mut slices = [IoSlice::new(&[]); 2];
+                let vectored = input.chunks_vectored(&mut slices);
+                if vectored == 0 {
+                    return std::task::Poll::Ready(std::io::Result::Ok(()));
+                }
+                let n = ready!(Pin::new(&mut stdin).poll_write_vectored(cx, &slices))?;
+                writes_completed += 1;
+                input.advance(n);
             }
-            let n = ready!(Pin::new(&mut stdin).poll_write_vectored(cx, &slices))?;
-            writes_completed += 1;
-            input.advance(n);
         })
         .await?;
 

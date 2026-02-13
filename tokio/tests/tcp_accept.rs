@@ -1,6 +1,6 @@
 #![warn(rust_2018_idioms)]
 #![cfg(all(feature = "full", not(target_os = "wasi"), not(miri)))] // Wasi doesn't support bind
-                                                                   // No `socket` on miri.
+// No `socket` on miri.
 
 use tokio::net::{TcpListener, TcpStream};
 use tokio::sync::{mpsc, oneshot};
@@ -43,8 +43,8 @@ test_accept! {
 
 use std::pin::Pin;
 use std::sync::{
-    atomic::{AtomicUsize, Ordering::SeqCst},
     Arc,
+    atomic::{AtomicUsize, Ordering::SeqCst},
 };
 use std::task::{Context, Poll};
 use tokio_stream::{Stream, StreamExt};
@@ -97,7 +97,7 @@ async fn no_extra_poll() {
 
 #[tokio::test]
 async fn accept_many() {
-    use std::future::{poll_fn, Future};
+    use std::future::{Future, poll_fn};
     use std::sync::atomic::AtomicBool;
 
     const N: usize = 50;

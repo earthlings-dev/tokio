@@ -120,7 +120,7 @@ fn write_hits_backpressure() {
 
         // Append to the end
         match mock.calls.back_mut().unwrap() {
-            Ok(ref mut data) => {
+            Ok(data) => {
                 // Write in 2kb chunks
                 if data.len() < ITER {
                     data.extend_from_slice(&b[..]);

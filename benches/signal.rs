@@ -1,12 +1,12 @@
 //! Benchmark the delay in propagating OS signals to any listeners.
 #![cfg(unix)]
 
-use criterion::{criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
 use std::future::Future;
 use std::pin::Pin;
 use std::task::{Context, Poll};
 use tokio::runtime;
-use tokio::signal::unix::{signal, SignalKind};
+use tokio::signal::unix::{SignalKind, signal};
 use tokio::sync::mpsc;
 
 struct Spinner {

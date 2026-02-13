@@ -6,7 +6,7 @@ use tokio::io::{self, AsyncRead, AsyncReadExt, AsyncWrite, AsyncWriteExt, ReadBu
 use tokio_test::assert_ok;
 
 use std::pin::Pin;
-use std::task::{ready, Context, Poll};
+use std::task::{Context, Poll, ready};
 
 #[tokio::test]
 async fn copy() {

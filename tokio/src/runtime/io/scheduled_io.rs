@@ -241,18 +241,16 @@ impl ScheduledIo {
         let mut waiters = self.waiters.lock();
 
         // check for AsyncRead slot
-        if ready.is_readable() {
-            if let Some(waker) = waiters.reader.take() {
+        if ready.is_readable()
+            && let Some(waker) = waiters.reader.take() {
                 wakers.push(waker);
             }
-        }
 
         // check for AsyncWrite slot
-        if ready.is_writable() {
-            if let Some(waker) = waiters.writer.take() {
+        if ready.is_writable()
+            && let Some(waker) = waiters.writer.take() {
                 wakers.push(waker);
             }
-        }
 
         'outer: loop {
             let mut iter = waiters.list.drain_filter(|w| ready.satisfies(w.interest));

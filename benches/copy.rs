@@ -1,10 +1,10 @@
-use criterion::{criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
 
-use rand::{Rng, SeedableRng};
+use rand::{RngExt, SeedableRng};
 use rand_chacha::ChaCha20Rng;
 
-use tokio::io::{copy, repeat, AsyncRead, AsyncReadExt, AsyncWrite};
-use tokio::time::{interval, Interval, MissedTickBehavior};
+use tokio::io::{AsyncRead, AsyncReadExt, AsyncWrite, copy, repeat};
+use tokio::time::{Interval, MissedTickBehavior, interval};
 
 use std::task::Poll;
 use std::time::Duration;

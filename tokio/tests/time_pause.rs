@@ -2,8 +2,8 @@
 #![cfg(feature = "full")]
 #![cfg(not(miri))] // Too slow on miri.
 
-use rand::SeedableRng;
-use rand::{rngs::StdRng, Rng};
+use rand::rngs::StdRng;
+use rand::{RngExt, SeedableRng};
 use tokio::time::{self, Duration, Instant, Sleep};
 use tokio_test::{assert_elapsed, assert_pending, assert_ready, assert_ready_eq, task};
 
@@ -131,7 +131,7 @@ impl Future for Tester {
                 self.state = State::AwaitingAdvance(advance_fut);
                 self.poll(cx)
             }
-            State::AwaitingAdvance(ref mut advance_fut) => match advance_fut.as_mut().poll(cx) {
+            State::AwaitingAdvance(advance_fut) => match advance_fut.as_mut().poll(cx) {
                 Poll::Pending => Poll::Pending,
                 Poll::Ready(()) => {
                     self.state = State::AfterAdvance;

@@ -3,7 +3,7 @@
 
 use std::{convert::Infallible, sync::Arc};
 
-use tokio::sync::{oneshot, Semaphore};
+use tokio::sync::{Semaphore, oneshot};
 use tokio_test::{assert_pending, assert_ready, task};
 
 #[cfg(all(target_family = "wasm", not(target_os = "wasi")))]

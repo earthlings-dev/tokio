@@ -1,5 +1,5 @@
-use crate::stream_ext::Fuse;
 use crate::Stream;
+use crate::stream_ext::Fuse;
 
 use core::pin::Pin;
 use core::task::{Context, Poll};

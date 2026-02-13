@@ -27,7 +27,7 @@
 #![warn(rust_2018_idioms)]
 
 use tokio::net::{TcpListener, TcpStream};
-use tokio::sync::{mpsc, Mutex};
+use tokio::sync::{Mutex, mpsc};
 use tokio_stream::StreamExt;
 use tokio_util::codec::{Framed, LinesCodec};
 
@@ -43,7 +43,7 @@ const DEFAULT_ADDR: &str = "127.0.0.1:6142";
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
-    use tracing_subscriber::{fmt::format::FmtSpan, EnvFilter};
+    use tracing_subscriber::{EnvFilter, fmt::format::FmtSpan};
     // Configure a `tracing` subscriber that logs traces emitted by the chat
     // server.
     tracing_subscriber::fmt()

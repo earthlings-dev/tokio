@@ -84,9 +84,12 @@ async fn memory_leak_when_fd_closed_before_drop() {
     }
 
     fn set_nonblocking(fd: RawFd) {
-        use nix::fcntl::{OFlag, F_GETFL, F_SETFL};
+        use nix::fcntl::{F_GETFL, F_SETFL, OFlag};
+        use std::os::fd::BorrowedFd;
 
-        let flags = nix::fcntl::fcntl(fd, F_GETFL).expect("fcntl(F_GETFL)");
+        // SAFETY: fd is valid for the duration of these calls.
+        let borrowed = unsafe { BorrowedFd::borrow_raw(fd) };
+        let flags = nix::fcntl::fcntl(borrowed, F_GETFL).expect("fcntl(F_GETFL)");
 
         if flags < 0 {
             panic!(
@@ -98,7 +101,8 @@ async fn memory_leak_when_fd_closed_before_drop() {
 
         let flags = OFlag::from_bits_truncate(flags) | OFlag::O_NONBLOCK;
 
-        nix::fcntl::fcntl(fd, F_SETFL(flags)).expect("fcntl(F_SETFL)");
+        let borrowed = unsafe { BorrowedFd::borrow_raw(fd) };
+        nix::fcntl::fcntl(borrowed, F_SETFL(flags)).expect("fcntl(F_SETFL)");
     }
 
     // Warm up - let runtime and allocator stabilize

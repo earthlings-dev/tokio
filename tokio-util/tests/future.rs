@@ -1,5 +1,5 @@
 use std::{
-    future::{pending, ready, Future},
+    future::{Future, pending, ready},
     task::{Context, Poll},
 };
 

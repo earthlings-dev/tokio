@@ -6,7 +6,7 @@ use futures::future;
 use std::error::Error;
 use std::time::Duration;
 use tokio::runtime::{Builder, Runtime};
-use tokio::time::{self, interval, interval_at, timeout, Instant};
+use tokio::time::{self, Instant, interval, interval_at, timeout};
 
 mod support {
     pub mod panic;

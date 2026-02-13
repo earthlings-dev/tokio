@@ -3,7 +3,7 @@
 
 use std::panic::AssertUnwindSafe;
 
-use futures::future::{pending, FutureExt};
+use futures::future::{FutureExt, pending};
 use tokio::sync::oneshot;
 use tokio::task::LocalSet;
 use tokio::time::Duration;

@@ -1,6 +1,7 @@
 use std::time::{Duration, Instant};
 
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
+use std::hint::black_box;
 use tokio::{
     runtime::Runtime,
     time::{sleep, timeout},

@@ -199,11 +199,10 @@ impl Wheel {
         let mut res = true;
 
         for level in &self.levels[start_level..] {
-            if let Some(e2) = level.next_expiration(self.elapsed) {
-                if e2.deadline < before {
+            if let Some(e2) = level.next_expiration(self.elapsed)
+                && e2.deadline < before {
                     res = false;
                 }
-            }
         }
 
         res

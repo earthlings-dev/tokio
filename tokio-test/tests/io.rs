@@ -20,7 +20,7 @@ async fn read() {
 
 #[tokio::test]
 async fn read_error() {
-    let error = io::Error::new(io::ErrorKind::Other, "cruel");
+    let error = io::Error::other("cruel");
     let mut mock = Builder::new()
         .read(b"hello ")
         .read_error(error)
@@ -76,7 +76,7 @@ async fn read_with_handle() {
 
 #[tokio::test]
 async fn write_error() {
-    let error = io::Error::new(io::ErrorKind::Other, "cruel");
+    let error = io::Error::other("cruel");
     let mut mock = Builder::new()
         .write(b"hello ")
         .write_error(error)
@@ -122,7 +122,7 @@ async fn wait() {
     let mut buf = [0; 256];
 
     let start = Instant::now(); // record the time the read call takes
-                                //
+    //
     let n = mock.read(&mut buf).await.expect("read 1");
     assert_eq!(&buf[..n], b"hello ");
     println!("time elapsed after first read {:?}", start.elapsed());

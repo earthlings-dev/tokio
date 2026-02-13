@@ -2,7 +2,8 @@
 name = "tests-integration"
 version = "0.1.0"
 authors = ["Tokio Contributors <team@tokio.rs>"]
-edition = "2021"
+edition.workspace = true
+rust-version.workspace = true
 license = "MIT"
 publish = false
 
@@ -56,11 +57,11 @@ rt = ["tokio/rt"]
 rt-multi-thread = ["rt", "tokio/rt-multi-thread"]
 
 [dependencies]
-tokio = { version = "1.0.0", path = "../tokio" }
-tokio-test = { version = "0.4", path = "../tokio-test", optional = true }
-doc-comment = "0.3.1"
-futures = { version = "0.3.0", features = ["async-await"] }
-bytes = "1.0.0"
+tokio = { workspace = true }
+tokio-test = { workspace = true, optional = true }
+doc-comment = { workspace = true }
+futures = { workspace = true, default-features = true, features = ["async-await"] }
+bytes = { workspace = true }
 
 [lints]
 workspace = true

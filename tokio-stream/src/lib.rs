@@ -76,7 +76,7 @@ mod macros;
 pub mod wrappers;
 
 mod stream_ext;
-pub use stream_ext::{collect::FromStream, StreamExt};
+pub use stream_ext::{StreamExt, collect::FromStream};
 /// Adapters for [`Stream`]s created by methods in [`StreamExt`].
 pub mod adapters {
     pub use crate::stream_ext::{
@@ -96,16 +96,16 @@ cfg_time! {
 }
 
 mod empty;
-pub use empty::{empty, Empty};
+pub use empty::{Empty, empty};
 
 mod iter;
-pub use iter::{iter, Iter};
+pub use iter::{Iter, iter};
 
 mod once;
-pub use once::{once, Once};
+pub use once::{Once, once};
 
 mod pending;
-pub use pending::{pending, Pending};
+pub use pending::{Pending, pending};
 
 mod stream_map;
 pub use stream_map::StreamMap;

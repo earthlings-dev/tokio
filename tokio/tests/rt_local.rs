@@ -3,8 +3,8 @@
 
 use std::panic;
 use tokio::runtime::LocalOptions;
-use tokio::task::spawn_local;
 use tokio::task::LocalSet;
+use tokio::task::spawn_local;
 
 #[test]
 fn test_spawn_local_in_runtime() {

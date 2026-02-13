@@ -6,11 +6,11 @@ use tokio::net::TcpListener;
 use tokio::runtime;
 use tokio_test::{assert_ok, assert_pending};
 
-use futures::task::{waker_ref, ArcWake};
+use futures::task::{ArcWake, waker_ref};
 use std::future::Future;
 use std::net::TcpStream;
 use std::pin::Pin;
-use std::sync::{mpsc, Arc, Mutex};
+use std::sync::{Arc, Mutex, mpsc};
 use std::task::Context;
 
 struct Task<T> {

@@ -3,7 +3,7 @@ use tokio::runtime::Runtime;
 use tokio::{sync::Semaphore, task};
 
 use criterion::measurement::WallTime;
-use criterion::{criterion_group, criterion_main, BenchmarkGroup, Criterion};
+use criterion::{BenchmarkGroup, Criterion, criterion_group, criterion_main};
 
 fn single_rt() -> Runtime {
     tokio::runtime::Builder::new_current_thread()

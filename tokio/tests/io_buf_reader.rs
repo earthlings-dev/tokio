@@ -3,7 +3,7 @@
 
 // https://github.com/rust-lang/futures-rs/blob/1803948ff091b4eabf7f3bf39e16bbbdefca5cc8/futures/tests/io_buf_reader.rs
 
-use futures::task::{noop_waker_ref, Context, Poll};
+use futures::task::{Context, Poll, noop_waker_ref};
 use std::cmp;
 use std::io::{self, Cursor};
 use std::pin::Pin;

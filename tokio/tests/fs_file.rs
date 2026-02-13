@@ -2,8 +2,8 @@
 #![cfg(all(feature = "full", not(target_os = "wasi")))] // WASI does not support all fs operations
 
 use futures::future::FutureExt;
-use std::io::prelude::*;
 use std::io::IoSlice;
+use std::io::prelude::*;
 use tempfile::NamedTempFile;
 use tokio::fs::File;
 use tokio::io::{AsyncReadExt, AsyncSeekExt, AsyncWriteExt, SeekFrom};

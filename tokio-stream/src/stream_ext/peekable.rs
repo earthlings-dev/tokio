@@ -4,8 +4,8 @@ use std::task::{Context, Poll};
 use futures_core::Stream;
 use pin_project_lite::pin_project;
 
-use crate::stream_ext::Fuse;
 use crate::StreamExt;
+use crate::stream_ext::Fuse;
 
 pin_project! {
     /// Stream returned by the [`peekable`](super::StreamExt::peekable) method.

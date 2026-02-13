@@ -2,7 +2,8 @@
 //! This essentially measure the time to enqueue a task in the local and remote
 //! case.
 
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
+use std::hint::black_box;
 
 fn time_now_current_thread(c: &mut Criterion) {
     let rt = tokio::runtime::Builder::new_current_thread()

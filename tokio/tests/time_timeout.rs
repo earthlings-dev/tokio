@@ -2,7 +2,7 @@
 #![cfg(feature = "full")]
 
 use tokio::sync::oneshot;
-use tokio::time::{self, timeout, timeout_at, Instant};
+use tokio::time::{self, Instant, timeout, timeout_at};
 use tokio_test::*;
 
 use futures::future::pending;

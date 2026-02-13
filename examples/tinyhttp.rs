@@ -15,7 +15,7 @@
 
 use bytes::BytesMut;
 use futures::SinkExt;
-use http::{header::HeaderValue, Request, Response, StatusCode};
+use http::{Request, Response, StatusCode, header::HeaderValue};
 #[macro_use]
 extern crate serde_derive;
 use std::{env, error::Error, fmt, io};

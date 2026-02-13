@@ -5,7 +5,7 @@
 use std::{error::Error, sync::Arc};
 use tokio::{
     runtime::{Builder, Runtime},
-    sync::{broadcast, mpsc, oneshot, Mutex, RwLock, Semaphore},
+    sync::{Mutex, RwLock, Semaphore, broadcast, mpsc, oneshot},
 };
 
 mod support {

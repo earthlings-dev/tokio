@@ -1,9 +1,9 @@
 use futures::stream::iter;
-use tokio_stream::{self as stream, pending, Stream, StreamExt, StreamMap};
+use tokio_stream::{self as stream, Stream, StreamExt, StreamMap, pending};
 use tokio_test::{assert_ok, assert_pending, assert_ready, task};
 
-use std::future::{poll_fn, Future};
-use std::pin::{pin, Pin};
+use std::future::{Future, poll_fn};
+use std::pin::{Pin, pin};
 use std::task::Poll;
 
 mod support {

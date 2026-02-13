@@ -2,7 +2,8 @@ use std::sync::Arc;
 use tokio::{sync::RwLock, task};
 
 use criterion::measurement::WallTime;
-use criterion::{black_box, criterion_group, criterion_main, BenchmarkGroup, Criterion};
+use criterion::{BenchmarkGroup, Criterion, criterion_group, criterion_main};
+use std::hint::black_box;
 
 fn read_uncontended(g: &mut BenchmarkGroup<WallTime>) {
     let rt = tokio::runtime::Builder::new_multi_thread()
