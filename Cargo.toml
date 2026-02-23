@@ -83,30 +83,30 @@ tokio-stream = { path = "tokio-stream" }
 tokio-util = { path = "tokio-util" }
 
 # Forked crates
-nix = { git = "https://github.com/earthlings-dev/nix-rs.git" }
-rand = { git = "https://github.com/earthlings-dev/rand.git" }
-rand_core = { git = "https://github.com/earthlings-dev/rand_core.git" }
-rand_chacha = { git = "https://github.com/earthlings-dev/rngs.git" }
-serde = { git = "https://github.com/earthlings-dev/serde.git" }
-serde_core = { git = "https://github.com/earthlings-dev/serde.git" }
-serde_derive = { git = "https://github.com/earthlings-dev/serde.git" }
-serde_json = { git = "https://github.com/earthlings-dev/json.git" }
-tempfile = { git = "https://github.com/earthlings-dev/tempfile.git" }
-tracing = { git = "https://github.com/earthlings-dev/tracing.git" }
-tracing-mock = { git = "https://github.com/earthlings-dev/tracing.git" }
-tracing-subscriber = { git = "https://github.com/earthlings-dev/tracing.git" }
-futures = { git = "https://github.com/earthlings-dev/futures-rs.git" }
-futures-core = { git = "https://github.com/earthlings-dev/futures-rs.git" }
-futures-io = { git = "https://github.com/earthlings-dev/futures-rs.git" }
-futures-sink = { git = "https://github.com/earthlings-dev/futures-rs.git" }
-futures-test = { git = "https://github.com/earthlings-dev/futures-rs.git" }
-futures-util = { git = "https://github.com/earthlings-dev/futures-rs.git" }
-futures-channel = { git = "https://github.com/earthlings-dev/futures-rs.git" }
-futures-task = { git = "https://github.com/earthlings-dev/futures-rs.git" }
-futures-executor = { git = "https://github.com/earthlings-dev/futures-rs.git" }
-futures-macro = { git = "https://github.com/earthlings-dev/futures-rs.git" }
-async-stream = { git = "https://github.com/earthlings-dev/async-stream.git" }
-async-stream-impl = { git = "https://github.com/earthlings-dev/async-stream.git" }
+nix = { path = "../nix-rs" }
+rand = { path = "../rand" }
+rand_core = { path = "../rand_core" }
+rand_chacha = { path = "../rngs/rand_chacha" }
+serde = { path = "../serde/serde" }
+serde_core = { path = "../serde/serde_core" }
+serde_derive = { path = "../serde/serde_derive" }
+serde_json = { path = "../json" }
+tempfile = { path = "../tempfile" }
+tracing = { path = "../tracing/tracing" }
+tracing-mock = { path = "../tracing/tracing-mock" }
+tracing-subscriber = { path = "../tracing/tracing-subscriber" }
+futures = { path = "../futures-rs/futures" }
+futures-core = { path = "../futures-rs/futures-core" }
+futures-io = { path = "../futures-rs/futures-io" }
+futures-sink = { path = "../futures-rs/futures-sink" }
+futures-test = { path = "../futures-rs/futures-test" }
+futures-util = { path = "../futures-rs/futures-util" }
+futures-channel = { path = "../futures-rs/futures-channel" }
+futures-task = { path = "../futures-rs/futures-task" }
+futures-executor = { path = "../futures-rs/futures-executor" }
+futures-macro = { path = "../futures-rs/futures-macro" }
+async-stream = { path = "../async-stream/async-stream" }
+async-stream-impl = { path = "../async-stream/async-stream-impl" }
 
 [workspace.metadata.spellcheck]
 config = "spellcheck.toml"
